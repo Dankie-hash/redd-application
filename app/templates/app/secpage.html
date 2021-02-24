@@ -1,0 +1,85 @@
+{% extends 'app/core.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+{% load humanize %}
+{% block section %}{{section.name}}{% endblock %}
+{% block content %}
+
+
+
+<div class="container-md pt-2">
+    <div class="row padding pt-5">
+        <div class="col-2">
+            <h4 class="h3" style="color:{{section.colour}};">{{section.name}}</h4>
+        </div>
+
+        <div class="col-6 col-md-4 btn-group ml-auto">
+                    <a class="btn btn-sm btn-outline-secondary text-center href=">Learn</a>
+                    <a class="btn btn-sm btn-outline-secondary href=">Share</a>
+                    <a class="btn btn-sm btn-outline-secondary href=">Be</a>
+        </div>
+
+    </div>
+        <hr>
+</div>
+
+<div class="container-md">
+    <form class="text-center gore" method="POST">
+        {% csrf_token %}
+        <!--{{ form.title.errors }}
+        {{ form.title }}-->
+
+        <div class="row vorm">
+            {{ form.title.errors|striptags }}
+
+            {% render_field form.title class="form-control col-10" placeholder="Title your post here..." %}
+        </div>
+        <!--{{ form.text.errors }}
+        {{ form.text }}-->
+        <div class="row vorm">
+            {{ form.text.errors|striptags }}
+
+            {% render_field form.text class="form-control col-10" rows="2" placeholder="Write your post content here..." %}
+        </div>
+        <div class="row vorm">
+            <button class="btn col-2 btn-sm btn-outline-success btn-block" type="submit">Post</button>
+        </div>
+    </form>
+</div>
+    
+    
+
+    <!-- Cards -->
+
+{% for post in posts %}
+    <div class="container-md">
+        <div class="row ml-sm-3">
+            <div class="card w1 card-outer ml-sm-5">
+                <div class="card-header">
+                    <strong class="d-inline-block mb-2" style="color:{{post.section.colour}};">{{post.section.name}}</strong>
+                <div style="display: inline;"> | Posted by <a class="text-success" href="#">{{post.user.username}}</a></div>
+                </div>
+            <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'app:post' post.id %}" class="text-decoration-none text-reset">{{post.title}}</a></h5>
+                <p>{{post.mini_post}}</p>
+            </div>
+            <div class="card-footer">
+                <!--<div>70 Likes | 85 comments</div>-->
+                <div class="text-muted" style="display: inline;">{{post.created_on|naturaltime}}</div>
+                {% if post.user == request.user %}
+                <a href="{% url 'app:update-post' post.pk %}">
+                <button type="button" class="btn btn-sm btn-secondary" style="float: right;">Edit/Delete</button>
+                </a>
+                    {% endif %}
+                </div>
+
+
+        </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+
+    {% endblock %}

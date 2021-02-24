@@ -1,0 +1,71 @@
+body {
+  min-height: 75rem;
+  padding-top: 0.5rem;
+}
+
+
+#nav1 {
+    margin-left: 5rem;
+}
+
+.base {
+    margin: 0.2rem;
+}
+
+.b1 {
+    background-color: rgb(236, 229, 250);
+}
+
+.filt {
+    margin-top 5rem;
+    margin-right: 5rem;
+}
+
+.gore {
+    margin-left: 4rem;
+}
+
+.wilt {
+    margin right: 2rem
+    margin-top: 5rem;
+    width: 55vw;
+    background-color: rgb(180, 194, 159);
+}
+
+
+
+.w1 {
+    width: 70vw;
+    margin: 0.5rem;
+    margin-left: 2rem;
+}
+
+.card-outer {
+    background-color: rgb(221, 217, 217);
+}
+
+.card-inner {
+    background-color: darkblue;
+}
+
+.gold {
+    background-color: rgb(212,175,55);
+}
+
+.form {
+    margin-left: 5rem;
+}
+
+.vorm{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.vord{
+margin-left: 2rem;
+}
+
+.com{
+color: orange;
+}
+

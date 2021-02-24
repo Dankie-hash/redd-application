@@ -1,0 +1,72 @@
+{% extends 'app/core.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-md padding pt-5">
+        <div class="row padding pt-5">
+
+        <div class="card col-12 w1 card-outer">
+            <div class="card-header">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-success">Like</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Dislike</button>
+
+                </div>
+                Poster: <a class="text-success" href="">John</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card Title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up
+                    the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer">
+                70 Likes   |   86 replies | 2 days ago
+                </div>
+        </div>
+        </div>
+    </div>
+
+<div class="container-md">
+<div class="row">
+<form class="col-12">
+    {% csrf_token %}
+        {{ form.text.errors }}
+        {{ form.text }}
+  <div class="form-group">
+    <textarea class="form-control" id="description1" rows="3" placeholder="Comment on this post..."></textarea>
+  </div>
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>
+</div>
+</div>
+
+<div class="container-md">
+        <div class="row">
+
+        <div class="card w1 card-outer">
+            <div class="card-header">
+                Responder: <a class="text-success" href="">John</a>
+                </div>
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up
+                    the bulk of the card's content.</p>
+            </div>
+
+
+            <div class="card-footer";>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-success b-size">Like</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Dislike</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Reply</button>
+
+                </div>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

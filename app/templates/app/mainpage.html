@@ -1,0 +1,59 @@
+{% extends 'app/core.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<div class="container-md py-5">
+    <div class="row padding pt-5">
+        <div class="col-2">
+            <h3 class="h3">main</h3>
+        </div>
+        <div class="col-6 col-md-4 btn-group ml-auto">
+                    <a class="btn btn-sm btn-outline-secondary text-center href=">See</a>
+                    <a class="btn btn-sm btn-outline-secondary href=">Touch</a>
+                    <a class="btn btn-sm btn-outline-secondary href=">Create</a>
+        </div>
+
+    </div>
+        <hr>
+</div>
+
+
+    
+    
+
+    <!-- Cards -->
+
+{% for post in posts %}
+    <div class="container-md ">
+        <div class="row ml-4 ">
+        <div class="card w1 card-outer">
+            <div class="card-header">
+                <strong class="d-inline-block mb-2"><a href="{{post.section.get_absolute_url}}" style="color:{{post.section.colour}};">{{post.section.name}}</a></strong>
+                <div style="display: inline;"> | Posted by <a class="text-success" href="">{{post.user.username}}</a></div>
+                </div>
+            <div class="card-body">
+                <h5 class="card-title"><a href="{{post.get_absolute_url}}" class="text-decoration-none text-reset">{{post.title}}</a></h5>
+                <p>{{post.mini_post}}</p>
+            </div>
+            <div class="card-footer">
+                <!--<div>70 Likes | 85 comments</div>-->
+                <div class="text-muted" style="display: inline;">{{post.created_on|naturaltime}}</div>
+                {% if post.user == request.user %}
+                <a href="{% url 'app:update-post' post.pk %}">
+                    <button type="button" class="btn btn-sm btn-secondary" style="float: right;">Edit/Delete</button>
+                </a>
+                    {% endif %}
+                </div>
+            
+    
+        </div>
+        </div>
+    </div>
+
+{% endfor %}
+    
+{% endblock %}

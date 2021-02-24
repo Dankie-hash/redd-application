@@ -1,0 +1,10 @@
+{% extends 'app/reallogin.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container ml-4 text-center" style="">
+<h6>You're logged out of Redd, Inc. To log back in, visit the link below. </h6>
+<a class="btn btn-md btn-success" href="{% url 'login' %}">Log In</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'app/core.html' %}
+{% load widget_tweaks %}
+{% load humanize %}
+{% load static %}
+{% block section %}{{post.section.name}}{% endblock %}
+{% block content %}
+
+<div class="container-md padding pt-3">
+        <div class="row padding mr-2">
+
+            <div class="card col-12 w1 card-outer">
+                <div class="card-header">
+                <!--
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-info">Like</button>
+                    <button type="button" class="btn btn-sm btn-outline-info">Dislike</button>
+
+                </div>
+                -->
+                    <div style="float:right;">
+                    Posted By: <a class="btn btn-sm btn-success" href="">{{post.user}}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.text}}</p>
+                </div>
+                <div class="card-footer">
+                    <div>
+                    <!--70 Likes   |   86 replies |--> {{post.created_on|naturaltime}}
+                    </div>
+                    <div style="float:right;">
+                    {% if post.user == request.user %}
+                    <a href="{% url 'app:update-post' post.pk %}">
+                    <button type="button" class="btn btn-sm btn-secondary">Edit/Delete</button>
+                    </a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="container-md">
+    <form class="text-center gore" method="POST">
+        {% csrf_token %}
+        <div class="row vorm">
+             {{ form.text.errors|striptags }}
+
+            {% render_field form.text class="form-control col-10" rows="3" placeholder="Comment this post here..." %}
+
+        </div>
+        <div class="row vorm">
+
+            <button class="btn col-2 btn-sm btn-outline-success btn-block" type="submit">Comment</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+{% for comment in comments %}
+<div class="container-md">
+        <div class="row ml-2">
+
+        <div class="card w1 card-outer">
+            <div class="card-header">
+                <!--
+                <div>
+                To: <a class="btn btn-sm btn-secondary" href="">John</a>
+                </div>
+                -->
+                <div style="float:right;">
+                Responder: <a class="btn btn-sm btn-success" href="">{{comment.user}}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{comment.text}}</p>
+            </div>
+
+
+            <div class="card-footer";>
+                <div class="btn-group">
+                    <!--
+                    <button type="button" class="btn btn-sm btn-outline-primary b-size">Like</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary">Dislike</button>
+                    <div class="ml-1" style="display:inline-block;">
+                    -->
+                    <a type="button" class="btn btn-sm btn-secondary" href="{% url 'app:comment' comment.post.id %}">Reply</a>
+                </div>
+                        {% if comment.user == request.user %}
+                        <a type="button" class="btn btn-sm btn-secondary ml-auto" href="{% url 'app:update-comment' comment.id %}">Edit/Delete</a>
+                {% endif %}
+                <div style="float:right;">
+                    <!--70 Likes   |   86 replies |--> {{comment.created_on|naturaltime}}
+                    </div>
+
+
+
+
+            </div>
+
+        </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
+

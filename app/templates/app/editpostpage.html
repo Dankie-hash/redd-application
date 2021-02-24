@@ -1,0 +1,14 @@
+{% extends 'app/update-deletepage.html' %}
+
+{% load static %}
+
+{% block heading %}
+<div class="row form-group col-7">
+
+        {{ form.title.errors }}
+        {{ form.title }}
+                <input type="text"  class="form-control" placeholder="Title" required>
+            </div>
+
+{% endblock %}
+
